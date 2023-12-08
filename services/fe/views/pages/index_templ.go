@@ -32,7 +32,7 @@ func Home() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</h1><form hx-post=\"/tasks\" hx-target=\"#tasks\" hx-swap=\"beforeend\"><div class=\"mb-4\"><label for=\"name\" class=\"block text-gray-600 text-sm font-semibold mb-2\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</h1><form hx-post=\"/hx/tasks\" hx-target=\"#tasks\" hx-swap=\"beforeend\"><div class=\"mb-4\"><label for=\"name\" class=\"block text-gray-600 text-sm font-semibold mb-2\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -68,7 +68,7 @@ func Home() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</button></form><div hx-get=\"/tasks\" hx-trigger=\"load\" hx-swap=\"outerHTML\"></div>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</button></form><div hx-get=\"/hx/tasks\" hx-trigger=\"load\" hx-swap=\"outerHTML\"></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

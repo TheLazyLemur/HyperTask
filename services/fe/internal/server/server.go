@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/a-h/templ"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 
@@ -12,6 +13,12 @@ import (
 	"github.com/thelazylemur/hypertask/services/fe/views/pages"
 	"github.com/thelazylemur/hypertask/services/task/client"
 )
+
+func pageHandler(p templ.Component) func(http.ResponseWriter, *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {
+		_ = pages.Base(p).Render(r.Context(), w)
+	}
+}
 
 func main() {
 	r := chi.NewRouter()
@@ -21,11 +28,9 @@ func main() {
 	task_client := client.New("localhost:8081")
 	defer task_client.Close()
 
-	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
-		_ = pages.Base(pages.Home()).Render(r.Context(), w)
-	})
+	r.Get("/", pageHandler(pages.Home()))
 
-	r.Post("/tasks", func(w http.ResponseWriter, r *http.Request) {
+	r.Post("/hx/tasks", func(w http.ResponseWriter, r *http.Request) {
 		name := r.FormValue("name")
 		description := r.FormValue("description")
 		weight := r.FormValue("weight")
@@ -45,7 +50,7 @@ func main() {
 		components.Task(*t).Render(r.Context(), w)
 	})
 
-	r.Get("/tasks", func(w http.ResponseWriter, r *http.Request) {
+	r.Get("/hx/tasks", func(w http.ResponseWriter, r *http.Request) {
 		tasks, err := task_client.GetTasks()
 
 		if err != nil {

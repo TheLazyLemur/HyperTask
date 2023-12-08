@@ -4,7 +4,7 @@ templ Home() {
 	<h1 class="text-3xl font-bold underline">
 		Welcome To Hyper Task!
 	</h1>
-	<form hx-post="/tasks" hx-target="#tasks" hx-swap="beforeend">
+	<form hx-post="/hx/tasks" hx-target="#tasks" hx-swap="beforeend">
 		<div class="mb-4">
 			<label for="name" class="block text-gray-600 text-sm font-semibold mb-2">Name</label>
 			<input type="text" id="name" name="name" class="w-full p-2 border rounded-md"/>
@@ -19,5 +19,5 @@ templ Home() {
 		</div>
 		<button type="submit" class="bg-green-500 text-white px-4 py-2 rounded-md">Submit</button>
 	</form>
-	<div hx-get="/tasks" hx-trigger="load" hx-swap="outerHTML"></div>
+	<div hx-get="/hx/tasks" hx-trigger="load" hx-swap="outerHTML"></div>
 }

@@ -9,6 +9,12 @@ import (
 	"google.golang.org/grpc/credentials/insecure"
 )
 
+type Client interface {
+	CreateTask(name string, desc string, weight int32) (*Task, error)
+	GetTasks() ([]*Task, error)
+	Close()
+}
+
 type client struct {
 	conn   *grpc.ClientConn
 	client pb.TaskClient
@@ -18,7 +24,7 @@ func (c *client) Close() {
 	defer c.conn.Close()
 }
 
-func New(serverAddr string) *client {
+func New(serverAddr string) Client {
 	i := insecure.NewCredentials()
 
 	opts := []grpc.DialOption{
@@ -41,8 +47,8 @@ func New(serverAddr string) *client {
 func (c *client) CreateTask(name string, desc string, weight int32) (*Task, error) {
 	task, err := c.client.CreateTask(context.Background(), &pb.CreateTaskRequest{
 		Name:        name,
-		Description: desc,
 		Weight:      weight,
+		Description: desc,
 	})
 	if err != nil {
 		log.Println("Failed to create task:", err)

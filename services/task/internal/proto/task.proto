@@ -7,6 +7,7 @@ option go_package = "./internal/pb";
 service Task {
   rpc CreateTask(CreateTaskRequest) returns (CreateTaskResponse);
   rpc GetTasks(GetTasksRequest) returns (GetTasksResponse);
+  rpc DeleteTask(DeleteTaskRequest) returns (DeleteTaskResponse);
 }
 
 message CreateTaskRequest {
@@ -22,13 +23,15 @@ message CreateTaskResponse {
   int32 weight = 4;
 }
 
+message GetTasksRequest {}
+message GetTasksResponse { repeated TaskObject tasks = 1; }
+
+message DeleteTaskRequest { string id = 1; }
+message DeleteTaskResponse {}
+
 message TaskObject {
   string id = 1;
   string name = 2;
   string description = 3;
   int32 weight = 4;
 }
-
-message GetTasksRequest {}
-
-message GetTasksResponse { repeated TaskObject tasks = 1; }

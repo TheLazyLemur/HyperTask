@@ -83,3 +83,16 @@ func (c *client) GetTasks() ([]*Task, error) {
 
 	return res, nil
 }
+
+func (c *client) Delete(id string) error {
+	_, err := c.client.DeleteTask(context.Background(), &pb.DeleteTaskRequest{
+		Id: id,
+	})
+
+	if err != nil {
+		log.Println("Failed to delete task:", err)
+		return err
+	}
+
+	return nil
+}

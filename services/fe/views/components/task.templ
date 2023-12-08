@@ -1,0 +1,24 @@
+package components
+
+import "github.com/thelazylemur/hypertask/services/task/client"
+import "fmt"
+
+templ Task(t client.Task) {
+	<div class="mb-4">
+		<div class="flex space-x-2">
+			<div>
+				<h3>
+					{ t.Name }
+				</h3>
+			</div>
+			<div>
+				<small>{ fmt.Sprintf("Weight: %d", t.Weight) }</small>
+			</div>
+		</div>
+		<div>
+			<p>
+				{ t.Description }
+			</p>
+		</div>
+	</div>
+}

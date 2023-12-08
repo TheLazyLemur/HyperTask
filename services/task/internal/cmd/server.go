@@ -4,7 +4,7 @@ import (
 	"log"
 	"log/slog"
 
-	"github.com/thelazylemur/hypertask/services/task/internal/server"
+	"hypertask/services/task/internal/server"
 )
 
 func main() {

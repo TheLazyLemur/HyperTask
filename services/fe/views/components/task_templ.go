@@ -10,7 +10,7 @@ import "context"
 import "io"
 import "bytes"
 
-import "github.com/thelazylemur/hypertask/services/task/client"
+import "hypertask/services/task/client"
 import "fmt"
 
 func taskUrl(t client.Task) string {

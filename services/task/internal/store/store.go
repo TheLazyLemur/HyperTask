@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/thelazylemur/hypertask/services/task/types"
+	"hypertask/services/task/types"
 )
 
 type TaskStore interface {

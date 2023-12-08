@@ -1,11 +1,11 @@
-module github.com/thelazylemur/hypertask
+module hypertask
 
 go 1.21.0
 
 require (
 	github.com/a-h/templ v0.2.476
 	github.com/go-chi/chi/v5 v5.0.10
-	github.com/google/uuid v1.3.1
+	github.com/google/uuid v1.4.0
 	google.golang.org/grpc v1.59.0
 	google.golang.org/protobuf v1.31.0
 )

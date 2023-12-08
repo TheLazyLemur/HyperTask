@@ -2,7 +2,7 @@ package client
 
 import (
 	"context"
-	"github.com/thelazylemur/hypertask/services/task/internal/pb"
+	"hypertask/services/task/internal/pb"
 	"log"
 
 	"google.golang.org/grpc"

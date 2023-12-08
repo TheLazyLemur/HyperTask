@@ -8,9 +8,9 @@ import (
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 
-	"github.com/thelazylemur/hypertask/services/fe/views/components"
-	"github.com/thelazylemur/hypertask/services/fe/views/pages"
-	"github.com/thelazylemur/hypertask/services/task/client"
+	"hypertask/services/fe/views/components"
+	"hypertask/services/fe/views/pages"
+	"hypertask/services/task/client"
 )
 
 func pageHandler(p templ.Component) func(http.ResponseWriter, *http.Request) {

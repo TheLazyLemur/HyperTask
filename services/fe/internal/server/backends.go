@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/thelazylemur/hypertask/services/task/client"
+	"hypertask/services/task/client"
 )
 
 type Backends interface {

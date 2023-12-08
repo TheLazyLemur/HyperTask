@@ -10,13 +10,14 @@ import (
 type TaskStore interface {
 	CreateTask(ctx context.Context, in *types.Task) (*types.Task, error)
 	GetTasks(ctx context.Context) ([]*types.Task, error)
+	DeleteTask(ctx context.Context, id string) error
 }
 
 type memoryStore struct {
 	tasks map[string]*types.Task
 }
 
-func NewMemoryStore() *memoryStore {
+func NewMemoryStore() TaskStore {
 	return &memoryStore{
 		tasks: make(map[string]*types.Task),
 	}
@@ -39,4 +40,14 @@ func (s *memoryStore) GetTasks(ctx context.Context) ([]*types.Task, error) {
 	}
 
 	return tasks, nil
+}
+
+func (s *memoryStore) DeleteTask(ctx context.Context, id string) error {
+	if _, ok := s.tasks[id]; !ok {
+		return fmt.Errorf("task with id %s does not exist", id)
+	}
+
+	delete(s.tasks, id)
+
+	return nil
 }

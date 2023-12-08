@@ -12,6 +12,7 @@ import (
 type Client interface {
 	CreateTask(name string, desc string, weight int32) (*Task, error)
 	GetTasks() ([]*Task, error)
+	DeleteTask(id string) error
 	Close()
 }
 
@@ -84,7 +85,7 @@ func (c *client) GetTasks() ([]*Task, error) {
 	return res, nil
 }
 
-func (c *client) Delete(id string) error {
+func (c *client) DeleteTask(id string) error {
 	_, err := c.client.DeleteTask(context.Background(), &pb.DeleteTaskRequest{
 		Id: id,
 	})

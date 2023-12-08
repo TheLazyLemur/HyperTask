@@ -49,13 +49,22 @@ func main() {
 
 	r.Get("/hx/tasks", func(w http.ResponseWriter, r *http.Request) {
 		tasks, err := task_client.GetTasks()
-
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
 
 		components.TaskList(tasks).Render(r.Context(), w)
+	})
+
+	r.Delete("/hx/tasks/{id}", func(w http.ResponseWriter, r *http.Request) {
+		err := task_client.DeleteTask(chi.URLParam(r, "id"))
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+
+		w.Write([]byte(""))
 	})
 
 	slog.Info("Starting server on :3001")

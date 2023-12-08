@@ -3,8 +3,16 @@ package components
 import "github.com/thelazylemur/hypertask/services/task/client"
 import "fmt"
 
+func taskUrl(t client.Task) string {
+	return fmt.Sprintf("/hx/tasks/%s", t.Id)
+}
+
+func taskId(id string) string {
+	return fmt.Sprintf("t-%s", id)
+}
+
 templ Task(t client.Task) {
-	<div class="mb-4">
+	<div id={ taskId(t.Id) } class="mb-4">
 		<div class="flex space-x-2">
 			<div>
 				<h3>
@@ -20,5 +28,6 @@ templ Task(t client.Task) {
 				{ t.Description }
 			</p>
 		</div>
+		<button hx-delete={ taskUrl(t) } hx-target={ fmt.Sprintf("#%s", taskId(t.Id)) } hx-swap="outerHTML">Delete</button>
 	</div>
 }

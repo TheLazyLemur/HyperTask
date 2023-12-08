@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log/slog"
 	"net/http"
 	"strconv"
 
@@ -21,7 +22,7 @@ func main() {
 	defer task_client.Close()
 
 	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
-		_ = pages.Home().Render(r.Context(), w)
+		_ = pages.Base(pages.Home()).Render(r.Context(), w)
 	})
 
 	r.Post("/tasks", func(w http.ResponseWriter, r *http.Request) {
@@ -55,5 +56,6 @@ func main() {
 		components.TaskList(tasks).Render(r.Context(), w)
 	})
 
+	slog.Info("Starting server on :3001")
 	http.ListenAndServe(":3001", r)
 }

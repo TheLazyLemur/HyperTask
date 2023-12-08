@@ -82,6 +82,15 @@ func (s *server) GetTasks(ctx context.Context, in *pb.GetTasksRequest) (*pb.GetT
 	}, nil
 }
 
+func (s *server) DeleteTask(ctx context.Context, in *pb.DeleteTaskRequest) (*pb.DeleteTaskResponse, error) {
+	err := s.store.DeleteTask(ctx, in.Id)
+	if err != nil {
+		return nil, status.Error(codes.Internal, err.Error())
+	}
+
+	return &pb.DeleteTaskResponse{}, nil
+}
+
 func (s *server) Start() error {
 	reflection.Register(s.grpc_server)
 

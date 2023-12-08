@@ -6,8 +6,8 @@ import (
 	"net"
 
 	"github.com/google/uuid"
+	"github.com/thelazylemur/hypertask/services/task/internal/pb"
 	"github.com/thelazylemur/hypertask/services/task/internal/store"
-	"github.com/thelazylemur/hypertask/services/task/pb"
 	"github.com/thelazylemur/hypertask/services/task/types"
 
 	"google.golang.org/grpc"

@@ -18,7 +18,7 @@ func main() {
 	r.Use(middleware.Logger)
 
 	task_client := client.New("localhost:8081")
-	_ = task_client
+	defer task_client.Close()
 
 	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
 		_ = pages.Home().Render(r.Context(), w)
@@ -42,6 +42,17 @@ func main() {
 		}
 
 		components.Task(*t).Render(r.Context(), w)
+	})
+
+	r.Get("/tasks", func(w http.ResponseWriter, r *http.Request) {
+		tasks, err := task_client.GetTasks()
+
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+
+		components.TaskList(tasks).Render(r.Context(), w)
 	})
 
 	http.ListenAndServe(":3001", r)

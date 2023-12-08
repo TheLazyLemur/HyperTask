@@ -28,7 +28,7 @@ templ Home() {
 				</div>
 				<button type="submit" class="bg-green-500 text-white px-4 py-2 rounded-md">Submit</button>
 			</form>
-			<div id="tasks"></div>
+			<div hx-get="/tasks" hx-trigger="load" hx-swap="outerHTML"></div>
 		</body>
 	</html>
 }

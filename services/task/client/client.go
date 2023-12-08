@@ -2,7 +2,7 @@ package client
 
 import (
 	"context"
-	"github.com/thelazylemur/hypertask/services/task/pb"
+	"github.com/thelazylemur/hypertask/services/task/internal/pb"
 	"log"
 
 	"google.golang.org/grpc"
@@ -45,6 +45,7 @@ func (c *client) CreateTask(name string, desc string, weight int32) (*Task, erro
 		Weight:      weight,
 	})
 	if err != nil {
+		log.Println("Failed to create task:", err)
 		return nil, err
 	}
 
@@ -59,6 +60,7 @@ func (c *client) CreateTask(name string, desc string, weight int32) (*Task, erro
 func (c *client) GetTasks() ([]*Task, error) {
 	tasks, err := c.client.GetTasks(context.Background(), &pb.GetTasksRequest{})
 	if err != nil {
+		log.Println("Failed to get tasks:", err)
 		return nil, err
 	}
 

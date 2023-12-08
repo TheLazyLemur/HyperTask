@@ -1,0 +1,11 @@
+package components
+
+import "github.com/thelazylemur/hypertask/services/task/client"
+
+templ TaskList(ts []*client.Task) {
+	<div id="tasks">
+		for _, t := range ts {
+			@Task(*t)
+		}
+	</div>
+}

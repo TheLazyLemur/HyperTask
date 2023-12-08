@@ -3,7 +3,6 @@ package main
 import (
 	"log/slog"
 	"net/http"
-	"strconv"
 
 	"github.com/a-h/templ"
 	"github.com/go-chi/chi/v5"
@@ -33,15 +32,13 @@ func main() {
 	r.Post("/hx/tasks", func(w http.ResponseWriter, r *http.Request) {
 		name := r.FormValue("name")
 		description := r.FormValue("description")
-		weight := r.FormValue("weight")
-
-		weightAsInt, err := strconv.Atoi(weight)
+		weight, err := formValueAsInt(r, "weight")
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
 
-		t, err := task_client.CreateTask(name, description, int32(weightAsInt))
+		t, err := task_client.CreateTask(name, description, int32(weight))
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return

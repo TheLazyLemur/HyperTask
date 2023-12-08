@@ -61,6 +61,27 @@ func (s *server) CreateTask(ctx context.Context, in *pb.CreateTaskRequest) (*pb.
 	}, nil
 }
 
+func (s *server) GetTasks(ctx context.Context, in *pb.GetTasksRequest) (*pb.GetTasksResponse, error) {
+	tasks, err := s.store.GetTasks(ctx)
+	if err != nil {
+		return nil, status.Error(codes.Internal, err.Error())
+	}
+
+	res := make([]*pb.TaskObject, 0)
+	for _, t := range tasks {
+		res = append(res, &pb.TaskObject{
+			Id:          t.Id,
+			Name:        t.Name,
+			Description: t.Description,
+			Weight:      t.Weight,
+		})
+	}
+
+	return &pb.GetTasksResponse{
+		Tasks: res,
+	}, nil
+}
+
 func (s *server) Start() error {
 	reflection.Register(s.grpc_server)
 

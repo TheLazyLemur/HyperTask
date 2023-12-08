@@ -4,7 +4,10 @@ package task;
 
 option go_package = "./pb";
 
-service Task { rpc CreateTask(CreateTaskRequest) returns (CreateTaskResponse); }
+service Task {
+  rpc CreateTask(CreateTaskRequest) returns (CreateTaskResponse);
+  rpc GetTasks(GetTasksRequest) returns (GetTasksResponse);
+}
 
 message CreateTaskRequest {
   string name = 1;
@@ -18,3 +21,14 @@ message CreateTaskResponse {
   string description = 3;
   int32 weight = 4;
 }
+
+message TaskObject {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  int32 weight = 4;
+}
+
+message GetTasksRequest {}
+
+message GetTasksResponse { repeated TaskObject tasks = 1; }

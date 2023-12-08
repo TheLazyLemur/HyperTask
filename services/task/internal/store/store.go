@@ -9,6 +9,7 @@ import (
 
 type TaskStore interface {
 	CreateTask(ctx context.Context, in *types.Task) (*types.Task, error)
+	GetTasks(ctx context.Context) ([]*types.Task, error)
 }
 
 type memoryStore struct {
@@ -28,4 +29,14 @@ func (s *memoryStore) CreateTask(ctx context.Context, in *types.Task) (*types.Ta
 
 	s.tasks[in.Id] = in
 	return in, nil
+}
+
+func (s *memoryStore) GetTasks(ctx context.Context) ([]*types.Task, error) {
+	tasks := make([]*types.Task, 0)
+
+	for _, t := range s.tasks {
+		tasks = append(tasks, t)
+	}
+
+	return tasks, nil
 }

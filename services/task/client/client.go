@@ -55,3 +55,23 @@ func (c *client) CreateTask(name string, desc string, weight int32) (*Task, erro
 		Weight:      task.Weight,
 	}, nil
 }
+
+func (c *client) GetTasks() ([]*Task, error) {
+	tasks, err := c.client.GetTasks(context.Background(), &pb.GetTasksRequest{})
+	if err != nil {
+		return nil, err
+	}
+
+	res := make([]*Task, 0)
+
+	for _, t := range tasks.Tasks {
+		res = append(res, &Task{
+			Id:          t.Id,
+			Name:        t.Name,
+			Description: t.Description,
+			Weight:      t.Weight,
+		})
+	}
+
+	return res, nil
+}
